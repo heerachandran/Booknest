@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BookNest | Smart Student Store</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            background: white;
+            color: #4f46e5;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 430px;
+            background: linear-gradient(
+                135deg,
+                #eef2ff,
+                #f5f3ff,
+                #ecfeff
+            );
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            gap: 40px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 45px;
+            color: #312e81;
+            margin-bottom: 18px;
+        }
+
+        .hero-text h1 span {
+            color: #7c3aed;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hero-card {
+            background: white;
+            width: 330px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero-card .emoji {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .hero-card h2 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+
+        /* SECTION */
+        .section {
+            padding: 50px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            color: #312e81;
+        }
+
+        .section-title p {
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* SEARCH */
+        .filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filters input,
+        .filters select {
+            padding: 13px;
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #4f46e5;
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            height: 130px;
+            background: linear-gradient(135deg, #eef2ff, #ede9fe);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: #f59e0b;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #4f46e5;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #4f46e5;
+            color: white;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #3730a3;
+        }
+
+        /* SMART KIT */
+        .smart-kit {
+            background: linear-gradient(135deg, #312e81, #6d28d9);
+            color: white;
+            padding: 50px 7%;
+        }
+
+        .smart-kit-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .smart-kit-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .smart-kit-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .smart-kit-title p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .kit-form {
+            background: white;
+            color: #222;
+            padding: 30px;
+            border-radius: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+        }
+
+        .generate-btn {
+            grid-column: span 2;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #7c3aed;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .kit-result {
+            margin-top: 30px;
+            display: none;
+            background: white;
+            color: #222;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .kit-result h3 {
+            color: #4f46e5;
+            margin-bottom: 15px;
+        }
+
+        .kit-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px;
+            background: #f5f3ff;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .why {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .kit-total {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #4f46e5;
+        }
+
+        .add-kit-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            background: #16a34a;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* CART */
+        .cart-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+            padding: 25px;
+            transition: 0.3s;
+            overflow-y: auto;
+        }
+
+        .cart-panel.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .close-cart {
+            border: none;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 7px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            padding: 15px;
+            background: #f5f7fb;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .cart-item-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .remove-btn {
+            color: #dc2626;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 7px;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 13px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* CHECKOUT */
+        .checkout {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 30px auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .checkout h2 {
+            color: #312e81;
+            margin-bottom: 20px;
+        }
+
+        .checkout input,
+        .checkout textarea,
+        .checkout select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+        }
+
+        .checkout textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* SUCCESS */
+        .success {
+            display: none;
+            text-align: center;
+            background: #ecfdf5;
+            padding: 35px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .success h2 {
+            color: #15803d;
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1e1b4b;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        /* MOBILE */
+        @media(max-width: 700px) {
+
+            nav {
+                padding: 15px;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav ul li:not(:last-child) {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 45px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 35px;
+            }
+
+            .hero-card {
+                width: 100%;
+                max-width: 330px;
+            }
+
+            .kit-form {
+                grid-template-columns: 1fr;
+            }
+
+            .generate-btn {
+                grid-column: span 1;
+            }
+
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">📚 BookNest</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#smart-kit">Smart Study Kit</a></li>
+        <li>
+            <button class="cart-btn" onclick="openCart()">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </button>
+        </li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-text">
+        <h1>
+            Everything Students Need,
+            <span>In One Place</span>
+        </h1>
+
+        <p>
+            Welcome to BookNest – a student-friendly online store
+            for books, stationery, study materials and smart study kits.
+        </p>
+
+        <button class="hero-btn"
+                onclick="document.getElementById('smart-kit').scrollIntoView()">
+            🎓 Create My Study Kit
+        </button>
+    </div>
+
+    <div class="hero-card">
+        <div class="emoji">🎓📚</div>
+
+        <h2>Smart Study Kit</h2>
+
+        <p>
+            Select your department, year, semester and budget.
+            BookNest will suggest useful study items for you.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+
+    <div class="section-title">
+        <h2>🛍️ Our Products</h2>
+        <p>Books, stationery and study essentials</p>
+    </div>
+
+    <div class="filters">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search products..."
+            onkeyup="displayProducts()"
+        >
+
+        <select id="categoryFilter" onchange="displayProducts()">
+
+            <option value="All">All Categories</option>
+
+            <option value="Books">Books</option>
+
+            <option value="Stationery">Stationery</option>
+
+            <option value="School Items">School Items</option>
+
+            <option value="Art Supplies">Art Supplies</option>
+
+        </select>
+
+    </div>
+
+    <div class="products" id="productContainer"></div>
+
+</section>
+
+
+<!-- SMART STUDY KIT -->
+<section class="smart-kit" id="smart-kit">
+
+    <div class="smart-kit-container">
+
+        <div class="smart-kit-title">
+
+            <h2>🎓 Smart Study Kit</h2>
+
+            <p>
+                Tell us about your studies and budget.
+                BookNest will generate a personalized study kit
+                using suitable books and stationery.
+            </p>
+
+        </div>
+
+
+        <div class="kit-form">
+
+            <div class="form-group">
+
+                <label>Department</label>
+
+                <select id="department">
+
+                    <option value="">Select Department</option>
+
+                    <option value="CSE">
+                        Computer Science Engineering
+                    </option>
+
+                    <option value="ECE">
+                        Electronics & Communication
+                    </option>
+
+                    <option value="EEE">
+                        Electrical & Electronics
+                    </option>
+
+                    <option value="MECH">
+                        Mechanical Engineering
+                    </option>
+
+                    <option value="CIVIL">
+                        Civil Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Year</label>
+
+                <select id="year">
+
+                    <option value="">Select Year</option>
+
+                    <option value="1">1st Year</option>
+
+                    <option value="2">2nd Year</option>
+
+                    <option value="3">3rd Year</option>
+
+                    <option value="4">4th Year</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Semester</label>
+
+                <select id="semester">
+
+                    <option value="">Select Semester</option>
+
+                    <option value="1">Semester 1</option>
+
+                    <option value="2">Semester 2</option>
+
+                    <option value="3">Semester 3</option>
+
+                    <option value="4">Semester 4</option>
+
+                    <option value="5">Semester 5</option>
+
+                    <option value="6">Semester 6</option>
+
+                    <option value="7">Semester 7</option>
+
+                    <option value="8">Semester 8</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Budget</label>
+
+                <select id="budget">
+
+                    <option value="">Select Budget</option>
+
+                    <option value="500">₹500</option>
+
+                    <option value="750">₹750</option>
+
+                    <option value="1000">₹1000</option>
+
+                    <option value="1500">₹1500</option>
+
+                    <option value="2000">₹2000</option>
+
+                    <option value="3000">₹3000</option>
+
+                </select>
+
+            </div>
+
+
+            <button class="generate-btn" onclick="generateStudyKit()">
+                ✨ Generate My Study Kit
+            </button>
+
+        </div>
+
+
+        <!-- KIT RESULT -->
+
+        <div class="kit-result" id="kitResult">
+
+            <h3 id="kitTitle">
+                Your Recommended Study Kit
+            </h3>
+
+            <div id="kitItems"></div>
+
+            <div class="kit-total">
+                Total: ₹<span id="kitTotal">0</span>
+            </div>
+
+            <button class="add-kit-btn" onclick="addKitToCart()">
+                🛒 Add Complete Kit to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CHECKOUT -->
+<section class="section">
+
+    <div class="checkout" id="checkout">
+
+        <h2>📦 Delivery Details</h2>
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Full Name"
+        >
+
+        <input
+            type="tel"
+            id="customerPhone"
+            placeholder="Mobile Number"
+        >
+
+        <textarea
+            id="customerAddress"
+            placeholder="Complete Delivery Address"
+        ></textarea>
+
+        <input
+            type="text"
+            id="customerCity"
+            placeholder="City"
+        >
+
+        <input
+            type="text"
+            id="customerState"
+            placeholder="State"
+        >
+
+        <input
+            type="text"
+            id="customerPin"
+            placeholder="PIN Code"
+        >
+
+        <button class="place-order" onclick="placeOrder()">
+            ✅ Place Order
+        </button>
+
+        <div class="success" id="successMessage">
+
+            <h2>🎉 Order Placed Successfully!</h2>
+
+            <p>
+                Thank you for shopping with BookNest.
+            </p>
+
+            <p>
+                Your order will be delivered to your address.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>🛒 Your Cart</h2>
+
+        <button class="close-cart" onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+        Total: ₹<span id="cartTotal">0</span>
+    </div>
+
+    <button class="checkout-btn" onclick="showCheckout()">
+        📦 Proceed to Checkout
+    </button>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 BookNest | Smart Student Books & Stationery Store
+    </p>
+
+    <p style="margin-top:8px;">
+        📚 Learn • ✏️ Create • 🎓 Grow
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* =========================
+       PRODUCT DATA
+    ========================= */
+
+    const products = [
+
+        {
+            id: 1,
+            name: "Python Programming",
+            price: 450,
+            category: "Books",
+            rating: 5,
+            icon: "🐍",
+            description: "Beginner friendly Python programming book"
+        },
+
+        {
+            id: 2,
+            name: "Atomic Habits",
+            price: 399,
+            category: "Books",
+            rating: 5,
+            icon: "📘",
+            description: "Popular self improvement book"
+        },
+
+        {
+            id: 3,
+            name: "The Alchemist",
+            price: 299,
+            category: "Books",
+            rating: 5,
+            icon: "📖",
+            description: "Classic inspirational novel"
+        },
+
+        {
+            id: 4,
+            name: "Data Structures",
+            price: 550,
+            category: "Books",
+            rating: 4,
+            icon: "💻",
+            description: "Data structures and algorithms"
+        },
+
+        {
+            id: 5,
+            name: "Classmate Notebook",
+            price: 80,
+            category: "Stationery",
+            rating: 5,
+            icon: "📓",
+            description: "High quality ruled notebook"
+        },
+
+        {
+            id: 6,
+            name: "Spiral Notebook",
+            price: 120,
+            category: "Stationery",
+            rating: 4,
+            icon: "📒",
+            description: "Spiral notebook for college notes"
+        },
+
+        {
+            id: 7,
+            name: "Premium Pen Set",
+            price: 150,
+            category: "Stationery",
+            rating: 5,
+            icon: "🖊️",
+            description: "Smooth writing premium pens"
+        },
+
+        {
+            id: 8,
+            name: "HB Pencil Set",
+            price: 40,
+            category: "Stationery",
+            rating: 5,
+            icon: "✏️",
+            description: "HB pencils for everyday use"
+        },
+
+        {
+            id: 9,
+            name: "Color Pencil Set",
+            price: 150,
+            category: "Art Supplies",
+            rating: 5,
+            icon: "🖍️",
+            description: "Bright colored pencils"
+        },
+
+        {
+            id: 10,
+            name: "Geometry Box",
+            price: 130,
+            category: "School Items",
+            rating: 5,
+            icon: "📐",
+            description: "Complete geometry instrument box"
+        },
+
+        {
+            id: 11,
+            name: "Scientific Calculator",
+            price: 650,
+            category: "School Items",
+            rating: 5,
+            icon: "🧮",
+            description: "Scientific calculator for engineering"
+        },
+
+        {
+            id: 12,
+            name: "Sticky Notes",
+            price: 70,
+            category: "Stationery",
+            rating: 4,
+            icon: "📝",
+            description: "Colorful sticky notes"
+        },
+
+        {
+            id: 13,
+            name: "Document Folder",
+            price: 60,
+            category: "Stationery",
+            rating: 5,
+            icon: "📁",
+            description: "Keep your documents organized"
+        },
+
+        {
+            id: 14,
+            name: "College Backpack",
+            price: 699,
+            category: "School Items",
+            rating: 5,
+            icon: "🎒",
+            description: "Durable college backpack"
+        },
+
+        {
+            id: 15,
+            name: "Water Color Set",
+            price: 180,
+            category: "Art Supplies",
+            rating: 5,
+            icon: "🎨",
+            description: "Water colors for creative work"
+        },
+
+        {
+            id: 16,
+            name: "Paint Brush Set",
+            price: 120,
+            category: "Art Supplies",
+            rating: 4,
+            icon: "🖌️",
+            description: "Different size paint brushes"
+        },
+
+        {
+            id: 17,
+            name: "30cm Ruler",
+            price: 25,
+            category: "School Items",
+            rating: 4,
+            icon: "📏",
+            description: "30 cm transparent ruler"
+        },
+
+        {
+            id: 18,
+            name: "Safety Scissors",
+            price: 55,
+            category: "Stationery",
+            rating: 4,
+            icon: "✂️",
+            description: "Safe and comfortable scissors"
+        }
+
+    ];
+
+
+    /* =========================
+       CART
+    ========================= */
+
+    let cart = [];
+
+    let generatedKit = [];
+
+
+    /* =========================
+       DISPLAY PRODUCTS
+    ========================= */
+
+    function displayProducts() {
+
+        const container =
+            document.getElementById("productContainer");
+
+        const search =
+            document.getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        const category =
+            document.getElementById("categoryFilter")
+            .value;
+
+
+        const filteredProducts = products.filter(product => {
+
+            const matchesSearch =
+                product.name.toLowerCase().includes(search);
+
+            const matchesCategory =
+                category === "All" ||
+                product.category === category;
+
+            return matchesSearch && matchesCategory;
+
+        });
+
+
+        container.innerHTML = "";
+
+
+        if (filteredProducts.length === 0) {
+
+            container.innerHTML = `
+                <p style="
+                    grid-column:1/-1;
+                    text-align:center;
+                    padding:30px;
+                    color:#777;
+                ">
+                    😔 No products found.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        filteredProducts.forEach(product => {
+
+            let stars = "";
+
+            for (let i = 0; i < product.rating; i++) {
+                stars += "⭐";
+            }
+
+
+            container.innerHTML += `
+
+                <div class="product-card">
+
+                    <div class="product-image">
+                        ${product.icon}
+                    </div>
+
+                    <h3>${product.name}</h3>
+
+                    <p>${product.description}</p>
+
+                    <div class="rating">
+                        ${stars}
+                    </div>
+
+                    <div class="price">
+                        ₹${product.price}
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart(${product.id})">
+
+                        🛒 Add to Cart
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+
+    /* =========================
+       ADD TO CART
+    ========================= */
+
+    function addToCart(productId) {
+
+        const product =
+            products.find(p => p.id === productId);
+
+        cart.push(product);
+
+        updateCart();
+
+        
+
+    }
+
+
+    /* =========================
+       UPDATE CART
+    ========================= */
+
+    function updateCart() {
+
+        const cartItems =
+            document.getElementById("cartItems");
+
+        const cartCount =
+            document.getElementById("cartCount");
+
+        const cartTotal =
+            document.getElementById("cartTotal");
+
+
+        cartCount.innerText = cart.length;
+
+
+        cartItems.innerHTML = "";
+
+
+        let total = 0;
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML = `
+                <p style="text-align:center;color:#777;">
+                    Your cart is empty 🛒
+                </p>
+            `;
+
+        }
+
+
+        cart.forEach((item, index) => {
+
+            total += item.price;
+
+
+            cartItems.innerHTML += `
+
+                <div class="cart-item">
+
+                    <div class="cart-item-top">
+
+                        <strong>
+                            ${item.icon} ${item.name}
+                        </strong>
+
+                        <strong>
+                            ₹${item.price}
+                        </strong>
+
+                    </div>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeFromCart(${index})">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+
+        cartTotal.innerText = total;
+
+    }
+
+
+    /* =========================
+       REMOVE CART ITEM
+    ========================= */
+
+    function removeFromCart(index) {
+
+        cart.splice(index, 1);
+
+        updateCart();
+
+    }
+
+
+    /* =========================
+       OPEN CART
+    ========================= */
+
+    function openCart() {
+
+        document
+            .getElementById("cartPanel")
+            .classList.add("active");
+
+    }
+
+
+    /* =========================
+       CLOSE CART
+    ========================= */
+
+    function closeCart() {
+
+        document
+            .getElementById("cartPanel")
+            .classList.remove("active");
+
+    }
+
+
+    /* =========================
+       SMART STUDY KIT
+    ========================= */
+
+    function generateStudyKit() {
+
+        const department =
+            document.getElementById("department").value;
+
+        const year =
+            document.getElementById("year").value;
+
+        const semester =
+            document.getElementById("semester").value;
+
+        const budget =
+            Number(document.getElementById("budget").value);
+
+
+        if (!department || !year || !semester || !budget) {
+
+            alert(
+                "Please select Department, Year, Semester and Budget."
+            );
+
+            return;
+        }
+
+
+        let recommendedIds = [];
+
+
+        /* CSE */
+        if (department === "CSE") {
+
+            recommendedIds = [
+                1,   // Python
+                4,   // Data Structures
+                5,   // Notebook
+                7,   // Pens
+                12,  // Sticky Notes
+                13   // Folder
+            ];
+
+        }
+
+
+        /* ECE */
+        else if (department === "ECE") {
+
+            recommendedIds = [
+                4,
+                5,
+                7,
+                10,
+                11,
+                13
+            ];
+
+        }
+
+
+        /* EEE */
+        else if (department === "EEE") {
+
+            recommendedIds = [
+                5,
+                7,
+                10,
+                11,
+                12,
+                13
+            ];
+
+        }
+
+
+        /* MECH */
+        else if (department === "MECH") {
+
+            recommendedIds = [
+                5,
+                7,
+                10,
+                11,
+                17,
+                13
+            ];
+
+        }
+
+
+        /* CIVIL */
+        else if (department === "CIVIL") {
+
+            recommendedIds = [
+                5,
+                7,
+                10,
+                11,
+                17,
+                13
+            ];
+
+        }
+
+
+        let kitProducts =
+            recommendedIds.map(id =>
+                products.find(product => product.id === id)
+            );
+
+
+        /* 
+           Filter items based on budget.
+           First priority = books + essential stationery.
+        */
+
+        let selectedKit = [];
+
+        let currentTotal = 0;
+
+
+        for (let product of kitProducts) {
+
+            if (currentTotal + product.price <= budget) {
+
+                selectedKit.push(product);
+
+                currentTotal += product.price;
+
+            }
+
+        }
+
+
+        /*
+           If nothing fits the budget
+        */
+
+        if (selectedKit.length === 0) {
+
+            alert(
+                "Your budget is too low for the recommended kit. Please choose a higher budget."
+            );
+
+            return;
+
+        }
+
+
+        generatedKit = selectedKit;
+
+
+        displayStudyKit(
+            selectedKit,
+            currentTotal,
+            department,
+            year,
+            semester,
+            budget
+        );
+
+    }
+
+
+    /* =========================
+       DISPLAY STUDY KIT
+    ========================= */
+
+    function displayStudyKit(
+        kit,
+        total,
+        department,
+        year,
+        semester,
+        budget
+    ) {
+
+        const result =
+            document.getElementById("kitResult");
+
+        const kitItems =
+            document.getElementById("kitItems");
+
+        const kitTotal =
+            document.getElementById("kitTotal");
+
+        const kitTitle =
+            document.getElementById("kitTitle");
+
+
+        kitTitle.innerText =
+            `🎓 ${department} - Year ${year} - Semester ${semester} Study Kit`;
+
+
+        kitItems.innerHTML = "";
+
+
+        kit.forEach(item => {
+
+            let reason = "";
+
+
+            if (department === "CSE") {
+
+                if (item.name === "Python Programming") {
+
+                    reason =
+                        "Useful for programming and coding practice.";
+
+                }
+
+                else if (item.name === "Data Structures") {
+
+                    reason =
+                        "Important for CSE data structure subjects.";
+
+                }
+
+                else {
+
+                    reason =
+                        "Useful for daily college study.";
+
+                }
+
+            }
+
+            else {
+
+                if (item.category === "Books") {
+
+                    reason =
+                        "Recommended as a study reference.";
+
+                }
+
+                else {
+
+                    reason =
+                        "Useful for regular academic work.";
+
+                }
+
+            }
+
+
+            kitItems.innerHTML += `
+
+                <div class="kit-item">
+
+                    <div>
+
+                        <strong>
+                            ${item.icon} ${item.name}
+                        </strong>
+
+                        <div class="why">
+                            ${reason}
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        ₹${item.price}
+                    </strong>
+
+                </div>
+
+            `;
+
+        });
+
+
+        kitTotal.innerText = total;
+
+
+        if (total > budget) {
+
+            kitTotal.innerHTML =
+                total +
+                " <span style='color:red;font-size:14px;'>Over Budget</span>";
+
+        }
+
+
+        result.style.display = "block";
+
+
+        result.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+
+    /* =========================
+       ADD COMPLETE KIT
+       ========================= */
+
+    function addKitToCart() {
+
+        if (generatedKit.length === 0) {
+
+            alert("Please generate a study kit first.");
+
+            return;
+
+        }
+
+
+        generatedKit.forEach(item => {
+
+            cart.push(item);
+
+        });
+
+
+        updateCart();
+
+
+        alert(
+            "Complete Smart Study Kit added to your cart! 🎓🛒"
+        );
+
+
+        openCart();
+
+    }
+
+
+    /* =========================
+       SHOW CHECKOUT
+       ========================= */
+
+    function showCheckout() {
+
+        if (cart.length === 0) {
+
+            alert("Your cart is empty!");
+
+            return;
+
+        }
+
+
+        closeCart();
+
+
+        const checkout =
+            document.getElementById("checkout");
+
+
+        checkout.style.display = "block";
+
+
+        checkout.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       PLACE ORDER
+    ========================= */
+
+    async function placeOrder() {
+
+    // ===============================
+    // GET CUSTOMER DETAILS
+    // ===============================
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const phone =
+        document.getElementById("customerPhone").value.trim();
+
+    const address =
+        document.getElementById("customerAddress").value.trim();
+
+    const city =
+        document.getElementById("customerCity").value.trim();
+
+    const state =
+        document.getElementById("customerState").value.trim();
+
+    const pin =
+        document.getElementById("customerPin").value.trim();
+
+
+    // ===============================
+    // CHECK DELIVERY DETAILS
+    // ===============================
+
+    if (
+        !name ||
+        !phone ||
+        !address ||
+        !city ||
+        !state ||
+        !pin
+    ) {
+
+        alert("Please fill all delivery details.");
+
+        return;
+    }
+
+
+    // ===============================
+    // CHECK PHONE NUMBER
+    // ===============================
+
+    if (phone.length < 10) {
+
+        alert("Please enter a valid mobile number.");
+
+        return;
+    }
+
+
+    // ===============================
+    // CHECK PIN CODE
+    // ===============================
+
+    if (pin.length !== 6) {
+
+        alert("Please enter a valid 6-digit PIN code.");
+
+        return;
+    }
+
+
+    // ===============================
+    // CHECK CART
+    // ===============================
+
+    if (!cart || cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+
+
+/* =================================
+   PAYMENT METHOD SELECTION
+================================= */
+
+const paymentRadios =
+    document.querySelectorAll('input[name="paymentMethod"]');
+
+const upiOptions =
+    document.getElementById("upiOptions");
+
+
+paymentRadios.forEach((radio) => {
+
+    radio.addEventListener("change", function () {
+
+        if (this.value === "UPI") {
+
+            upiOptions.style.display = "block";
+
+        } else {
+
+            upiOptions.style.display = "none";
+ 
+        }
+
+    });
+
+});
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+    // ===============================
+    // CALCULATE TOTAL
+    // ===============================
+
+    const totalAmount = cart.reduce(
+        (total, item) => {
+
+            const price = Number(item.price) || 0;
+
+            const quantity =
+                Number(item.quantity || item.qty || 1);
+
+            return total + (price * quantity);
+        },
+
+        0
+    );
+
+
+    // ===============================
+    // CREATE ORDER DATA
+    // ===============================
+
+    const orderData = {
+
+        customerName: name,
+
+        phone: phone,
+
+        address: address,
+
+        city: city,
+
+        state: state,
+
+        pin: pin,
+
+        items: cart,
+
+        totalAmount: totalAmount,
+        status: "Pending"
+    };
+
+
+    // ===============================
+    // SEND ORDER TO BACKEND
+    // ===============================
+
+    try {
+
+        console.log("=================================");
+        console.log("SENDING ORDER TO BACKEND");
+        console.log(orderData);
+        console.log("=================================");
+
+
+        const response = await fetch(
+            "http://localhost:5000/api/orders",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(orderData)
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        console.log("=================================");
+        console.log("BACKEND RESPONSE");
+        console.log(data);
+        console.log("=================================");
+
+
+        // ===============================
+        // CHECK API RESPONSE
+        // ===============================
+
+        if (!response.ok) {
+
+            alert(
+                "Order failed: " +
+                (data.message || "Unknown error")
+            );
+
+            return;
+        }
+
+
+        // ===============================
+        // ORDER SUCCESS
+        // ===============================
+
+       
+
+
+        // Show success message
+
+        document
+            .getElementById("successMessage")
+            .style.display = "block";
+
+
+        // Clear cart
+
+        cart = [];
+
+
+        // Update cart display
+
+        updateCart();
+
+
+        // Scroll to success message
+
+        document
+            .getElementById("successMessage")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+        console.log("ORDER SAVED SUCCESSFULLY");
+
+
+    } catch (error) {
+
+        // ===============================
+        // BACKEND CONNECTION ERROR
+        // ===============================
+
+        console.log("=================================");
+        console.log("ORDER API ERROR");
+        console.log(error);
+        console.log("=================================");
+
+
+        alert(
+            "Could not connect to backend. " +
+            "Please make sure the BookNest server is running."
+        );
+    }
+}
+
+    
+    /* =========================
+       INITIAL LOAD
+    ========================= */
+
+    displayProducts();
+
+    updateCart();
+
+</script>
+
+</body>
+</html>
